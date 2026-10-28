@@ -1,5 +1,9 @@
 from PIL import Image
 
+#general variables
+tall_char_correction = 0.5
+out_width = 60
+
 # current testing image
 img = Image.open("test.jpg")
 
@@ -11,6 +15,8 @@ gray.save("gray.jpg")
 in_width, in_height = img.size
 
 # resized values for screen fitted output for the converter
-out_width = 60
-out_height = in_height / in_width
+out_height = int(in_height / in_width * out_width * tall_char_correction)
+small = gray.resize((out_width, out_height))
+
+print(small.size)
 
