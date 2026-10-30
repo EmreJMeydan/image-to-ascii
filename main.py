@@ -4,6 +4,7 @@ from PIL import Image
 tall_char_correction = 0.5
 out_width = 60
 chars = "@%#*+=-:. "
+max_brightness = 255
 
 # current testing image
 img = Image.open("test.jpg")
@@ -19,9 +20,22 @@ in_width, in_height = img.size
 out_height = int(in_height / in_width * out_width * tall_char_correction)
 small = gray.resize((out_width, out_height))
 
+# centre coordinates
+width_centre = out_width // 2
+height_centre = out_height // 2
+
+# brightness variable
+brightness = small.getpixel((width_centre, height_centre))
+
+# single pixel index
+index = int((brightness / max_brightness) * len(chars) - 1) 
+
 # debug tests
-print(small.getpixel((out_width // 2, out_height // 2)))
 print(small.size)
+print(small.getpixel((width_centre, height_centre)))
+print(brightness)
+print(index)
+
 
 
 
