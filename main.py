@@ -28,13 +28,22 @@ height_centre = out_height // 2
 brightness = small.getpixel((width_centre, height_centre))
 
 # single pixel index
-index = int((brightness / max_brightness) * len(chars) - 1) 
+index = int((brightness / max_brightness) * (len(chars) - 1)) 
+
+# the main loop
+for y in range(out_height):
+    row = ""
+    for x in range(out_width):
+        brightness = small.getpixel((x,y))
+        index = int((brightness / max_brightness) * (len(chars) - 1))
+        row += chars[index]
+    print(row)
 
 # debug tests
 print(small.size)
-print(small.getpixel((width_centre, height_centre)))
 print(brightness)
 print(index)
+print(chars[index])
 
 
 
