@@ -3,6 +3,7 @@ from PIL import Image
 #general variables
 tall_char_correction = 0.5
 out_width = 60
+chars = "@%#*+=-:. "
 
 # current testing image
 img = Image.open("test.jpg")
@@ -18,5 +19,9 @@ in_width, in_height = img.size
 out_height = int(in_height / in_width * out_width * tall_char_correction)
 small = gray.resize((out_width, out_height))
 
+# debug tests
+print(small.getpixel((out_width // 2, out_height // 2)))
 print(small.size)
+
+
 
