@@ -3,33 +3,23 @@ from PIL import Image
 #general variables
 tall_char_correction = 0.5
 out_width = 120
-chars = "$@%&#*+=-:. "
+chars = " .:-=+*#%@"
 max_brightness = 255
-gamma = 1.5
+gamma = 0.7
 
 # current testing image
 img = Image.open("test.jpg")
 
-# turn image to greyscale + save greyscale image for further work
-gray = img.convert("L")
-gray.save("gray.jpg")
+# rgb split
+r, g, b = img.split()
+r.save("r.png")
 
 # width + height variables collected from iamge size
 in_width, in_height = img.size
 
 # resized values for screen fitted output for the converter
 out_height = int(in_height / in_width * out_width * tall_char_correction)
-small = gray.resize((out_width, out_height), Image.Resampling.LANCZOS)
-
-# centre coordinates
-width_centre = out_width // 2
-height_centre = out_height // 2
-
-# brightness variable
-#brightness = small.getpixel((width_centre, height_centre))
-
-# single pixel index
-#index = int((brightness / max_brightness) * (len(chars) - 1)) 
+small = r.resize((out_width, out_height), Image.Resampling.LANCZOS)
 
 # the main loop
 for y in range(out_height):
